@@ -10,8 +10,14 @@ var personas = [];
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE 
 // TIENE COMO id EL ID PASADO POR PARAMETRO.
 
-function ubicacion(personas) {
+function ubicacion(personas, id) {
+    personas;
+    for (i = 0; i < personas.length; i++) {
+        var encontrado = personas.indexOf(id);
+    }
+    return encontrado;
 
+    // NO FUNCIONA, NO RESUELTO.
 }
 
 
@@ -54,8 +60,8 @@ function agregarPersona(nombre, apellido, edad) {
  * elimina la primera persona de la lista
  */
 function eliminarPrimero() {
-
-    alert("Hacer funcionalidad para eliminar la primera persona de la lista.");
+    personas.shift();
+    recargarLista(personas)
 }
 
 // 4- COMPLETAR LA FUNCION eliminarUltimo() PARA QUE ELIMINE LA ULTIMA PERSONA 
@@ -67,8 +73,8 @@ function eliminarPrimero() {
  * elimina la ultima persona de la lista.
  */
 function eliminarUltimo() {
-
-    alert("Hacer funcionalidad para eliminar la ultima persona de la lista.");
+    personas.pop();
+    recargarLista(personas);
 }
 
 // 5- COMPLETAR LA FUNCION buscarPersonaPorNombre(nombre) PARA QUE QUITE DEL LISTADO
