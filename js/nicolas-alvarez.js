@@ -124,15 +124,12 @@ function limpiarBusquedaPersona() {
  * @param {number} id 
  */
 function editarPersona(id) {
-
-    alert("Hacer funcionalidad para abrir la edicion de una persona.");
-
-    // UNA VEZ ENCONTRADA LA PERSONA, DESCOMENTAR LA SIGUIENTE LINEA Y PASARLE LA PERSONA 
-    // ENCONTRADA, DE MODO QUE SE ABRA LA VENTANA DE EDICION.
-    // abrirActualizacionPersona(persona);
+    for (i = 0; i < personas.length; i++) {
+        if (personas[i]["id"] == id) {
+            abrirActualizacionPersona(personas);
+        }
+    }
 }
-
-
 
 // 8- COMPLETAR LA FUNCION actualizarPersona(id, nombre, apellido, edad) 
 // PARA QUE ENCUENTRA LA PERSONA CON EL ID QUE RECIBE POR PARAMETRO, Y ACTUALICE SUS 
@@ -148,9 +145,18 @@ function editarPersona(id) {
  * @param {number} edad 
  */
 function actualizarPersona(id, nombre, apellido, edad) {
-
-    alert("Usar la informacion recibida para actualizar una persona.");
+    for (i = 0; i < personas.length; i++) {
+        if (personas[i]["id"] == id) {
+            personas[i]["nombre"] = nombre
+            personas[i]["apellido"] = apellido
+            personas[i]["edad"] = edad
+        }
+    }
+    recargarLista(personas);
 }
+
+
+
 
 
 // 9- COMPLETAR LA FUNCION eliminarPersona(id) 
@@ -166,10 +172,12 @@ function actualizarPersona(id, nombre, apellido, edad) {
  * @param {number} idPersona 
  */
 function eliminarPersona(id) {
-
-
-    alert("Hacer la funcionalidad necesaria para eliminar la persona que tiene el id recibido.");
-
+    for (i = 0; i < personas.length; i++) {
+        if (personas[i]["id"] == id) {
+            personas.splice(0, 1);
+        }
+    }
+    recargarLista(personas);
 }
 
 
