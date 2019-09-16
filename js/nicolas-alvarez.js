@@ -92,9 +92,13 @@ function eliminarUltimo() {
  * @param {string} nombre 
  */
 function buscarPersonaPorNombre(nombre) {
-
-    alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
-
+    var arrayResultado = [];
+    for (i = 0; i < personas.length; i++) {
+        if (personas[i].nombre.search(nombre) > -1) {
+            arrayResultado.push(personas[i]);
+        }
+    }
+    recargarLista(arrayResultado);
 }
 
 
@@ -107,13 +111,8 @@ function buscarPersonaPorNombre(nombre) {
  * limpia la busqueda de persona.
  */
 function limpiarBusquedaPersona() {
-
-    alert("Hacer funcionalidad para mostrar la lista completa de personas cargadas.");
+    recargarLista(personas);
 }
-
-
-
-
 
 // 7- COMPLETAR LA FUNCION editarPersona(id) PARA QUE ENCUENTRA LA PERSONA CON EL ID
 // QUE RECIBE POR PARAMETRO, Y SE LA PASE A LA FUNCION abrirActualizacionPersona(persona)
