@@ -5,9 +5,11 @@
 
 var personas = ["santos", "medina", "ravenna", "lampone"];
 var id = [];
+var contador = 1;
 
-id = personas.length
-
+for (var i = 0; i < personas.length; i++) {
+    id.push("usuario" + contador++) 
+}
 
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE 
@@ -19,7 +21,7 @@ function recibirArray (personas, id) {
     }
 }
 
-recibirArray(personas)
+recibirArray(personas);
 
 // 2- COMPLETAR LA FUNCION agregarPersona(nombre, apellido, edad) PARA QUE 
 // CON LA INFORMACION RECIBIDA CREE UN OBJETO CON LAS SIGUIENTES PROPIEDADES
