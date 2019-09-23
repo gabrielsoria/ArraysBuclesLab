@@ -2,15 +2,37 @@
  * SECCION DE VARIABLES GLOBALES.
  * DEFINIR AQUI LAS VARIABLES GLOBALES NECESARIAS.
  */
+var acumulador = 7;
 
+//Valores de ejemplos para Test
+var personas = [
+    { id: 0, nombre: "Agustin", apellido: "Biagi", edad: 42 },
+    { id: 1, nombre: "Alejandro", apellido: "Biagi", edad: 42 },
+    { id: 2, nombre: "AnaLia", apellido: "Biagi", edad: 42 },
+    { id: 3, nombre: "Vero", apellido: "Fernandez", edad: 42 },
+    { id: 4, nombre: "Vale", apellido: "Fernandez", edad: 42 },
+    { id: 5, nombre: "Javier", apellido: "Alderete", edad: 42 },
+    { id: 6, nombre: "Maria del Carmen", apellido: "Biagi", edad: 42 },
+    { id: 7, nombre: "Graciela", apellido: "Vincenti", edad: 42 },
+];
 
+var elementoFiltrados = [];
 
-
+recargarLista(personas);
 
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE 
 // TIENE COMO id EL ID PASADO POR PARAMETRO.
 
+function buscarPersonaPorId(id){
+    for (let i = 0; i < personas.length; i++) {
+        if (personas[i].id == id) {
+            key = i;
+            break;
+        }
+    }
+    return key;
+}
 
 
 // 2- COMPLETAR LA FUNCION agregarPersona(nombre, apellido, edad) PARA QUE 
@@ -21,15 +43,41 @@
 // USAR LA FUNCION recargarLista(personas) QUE RECIBE POR PARAMETRO UN ARRAY DE PERSONAS
 // Y SE ENCARGA DE MOSTRARLO EN LA LISTA DE LA PANTALLA.
 
- /**
- * funcion que recibe la informacion necesaria para crear una persona y la agrega al listado de personas.
- * @param {string} nombre 
- * @param {string} apellido 
- * @param {number} edad 
- */
+/**
+* funcion que recibe la informacion necesaria para crear una persona y la agrega al listado de personas.
+* @param {string} nombre 
+* @param {string} apellido 
+* @param {number} edad 
+*/
+
+//Creando la clase persona
+function Persona(id, nombre, apellido, edad) {
+    this.id = id;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.edad = edad;
+}
+
 function agregarPersona(nombre, apellido, edad) {
 
-    alert("Usar la informacion recibida para crear una persona y agregarla a la lista de personas.");
+    //esta solucion es utilizando Objetos y un constructor.
+
+    var persona = new Persona(acumulador, nombre, apellido, edad);
+    acumulador++
+
+    //Esta seria la forma de usar los objetos literales.
+    // var persona = {
+    //     id:acumulador++,
+    //     nombre:nombre,
+    //     apellido:apellido,
+    //     edad:edad
+    // };
+
+    personas.push(persona);
+
+    recargarLista(personas);
+
+
 }
 
 
@@ -42,8 +90,24 @@ function agregarPersona(nombre, apellido, edad) {
  * elimina la primera persona de la lista
  */
 function eliminarPrimero() {
-
-    alert("Hacer funcionalidad para eliminar la primera persona de la lista.");
+    var eliminarPrimero;
+    var key;
+    if (elementoFiltrados.length == 0) {
+        personas.length == 0 ? alert("No hay personas en la lista") : (
+            eliminarPrimero = personas.shift(),
+            recargarLista(personas)
+        );
+    } else {
+        for (let i = 0; i < personas.length; i++) {
+            if (personas[i].id == elementoFiltrados[0].id) {
+                key = i;
+                break;
+            }
+        }
+        personas.splice(key, 1);
+        elementoFiltrados.length == 0 ? alert("No hay elementos en la lista") : eliminarPrimero = elementoFiltrados.shift();
+        recargarLista(elementoFiltrados);
+    }
 }
 
 // 4- COMPLETAR LA FUNCION eliminarUltimo() PARA QUE ELIMINE LA ULTIMA PERSONA 
@@ -55,8 +119,24 @@ function eliminarPrimero() {
  * elimina la ultima persona de la lista.
  */
 function eliminarUltimo() {
-
-    alert("Hacer funcionalidad para eliminar la ultima persona de la lista.");
+    var eliminarUltimo;
+    var key;
+    if (elementoFiltrados.length == 0) {
+        personas.length == 0 ? alert("No hay personas en la lista") : (
+            eliminarUltimo = personas.pop(),
+            recargarLista(personas)
+        );
+    } else {
+        for (let i = 0; i < personas.length; i++) {
+            if (personas[i].id == elementoFiltrados[elementoFiltrados.length - 1].id) {
+                key = i;
+                break;
+            }
+        }
+        personas.splice(key, 1);
+        elementoFiltrados.length == 0 ? alert("No hay elementos en la lista") : eliminarUltimo = elementoFiltrados.pop();
+        recargarLista(elementoFiltrados);
+    }
 }
 
 // 5- COMPLETAR LA FUNCION buscarPersonaPorNombre(nombre) PARA QUE QUITE DEL LISTADO
@@ -74,9 +154,17 @@ function eliminarUltimo() {
  * @param {string} nombre 
  */
 function buscarPersonaPorNombre(nombre) {
+    
+    personas.length == 0 ? alert("No hay personas en la lista") : true;
 
-    alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
+    for (let i = 0; i < personas.length; i++) {
+        (personas[i].nombre.search(nombre) != -1 || personas[i].apellido.search(nombre) != -1) ? (
+            elementoFiltrados.push(personas[i])
+        ) : true;
 
+    }
+
+    recargarLista(elementoFiltrados);
 }
 
 
@@ -89,8 +177,8 @@ function buscarPersonaPorNombre(nombre) {
  * limpia la busqueda de persona.
  */
 function limpiarBusquedaPersona() {
-
-    alert("Hacer funcionalidad para mostrar la lista completa de personas cargadas.");
+    elementoFiltrados.length = 0;
+    recargarLista(personas);
 }
 
 
@@ -106,13 +194,19 @@ function limpiarBusquedaPersona() {
  * y abrir el formulario de edicion.
  * @param {number} id 
  */
-function editarPersona(id) {
 
-    alert("Hacer funcionalidad para abrir la edicion de una persona.");
+
+ function editarPersona(id) {
+
+
+    var key=buscarPersonaPorId(id);
+    persona = personas[key];
+
+
 
     // UNA VEZ ENCONTRADA LA PERSONA, DESCOMENTAR LA SIGUIENTE LINEA Y PASARLE LA PERSONA 
     // ENCONTRADA, DE MODO QUE SE ABRA LA VENTANA DE EDICION.
-    // abrirActualizacionPersona(persona);
+    abrirActualizacionPersona(persona);
 }
 
 
@@ -132,7 +226,13 @@ function editarPersona(id) {
  */
 function actualizarPersona(id, nombre, apellido, edad) {
 
-    alert("Usar la informacion recibida para actualizar una persona.");
+    var key=buscarPersonaPorId(id);
+    personas[key].nombre = nombre;
+    personas[key].apellido = apellido;
+    personas[key].edad = edad;
+
+    recargarLista(personas);
+
 }
 
 
@@ -149,10 +249,28 @@ function actualizarPersona(id, nombre, apellido, edad) {
  * @param {number} idPersona 
  */
 function eliminarPersona(id) {
+    var eliminarPersona;
+    var key;
+    if (elementoFiltrados.length == 0) {
+        var key=buscarPersonaPorId(id);
+        personas.length == 0 ? alert("No hay elementos en la lista") : eliminarPersona = personas.splice(key, 1);
+        recargarLista(personas);
+    } else {
+        var key=buscarPersonaPorId(id);
+        personas.splice(key, 1);
 
-    
-    alert("Hacer la funcionalidad necesaria para eliminar la persona que tiene el id recibido.");
-    
+        for (let i = 0; i < elementoFiltrados.length; i++) {
+            if (elementoFiltrados[i].id == id) {
+                key = i;
+                break;
+            }
+        }
+        elementoFiltrados.length == 0 ? alert("No hay elementos en la lista") : eliminarPersona = elementoFiltrados.splice(key, 1);
+        recargarLista(elementoFiltrados);
+    }
+
+
+
 }
 
 
@@ -178,14 +296,14 @@ function eliminarPersona(id) {
  * @param {Array} personas 
  */
 function recargarLista(personas) {
-    
+
     // creacion de tabla y registro
     var table = document.getElementById("tablePersonas");
     var tbody = table.getElementsByTagName("tbody")[0];
 
     var tbodyNew = document.createElement('tbody');
 
-    for(var i = 0; i < personas.length; i++) {
+    for (var i = 0; i < personas.length; i++) {
 
         var tr = tbodyNew.insertRow(i);
 
@@ -213,13 +331,13 @@ function recargarLista(personas) {
         var button = document.createElement("button");
         button.className = "btn btn-primary btn-sm mr-1";
         button.type = "button";
-        button.setAttribute( "onClick", "javascript: eliminarPersona(" + personas[i].id + ");" );
+        button.setAttribute("onClick", "javascript: eliminarPersona(" + personas[i].id + ");");
         button.innerText = "Eliminar";
 
         var button2 = document.createElement("button");
         button2.className = "btn btn-primary btn-sm mr-1";
         button2.type = "button";
-        button2.setAttribute( "onClick", "javascript: editarPersona(" + personas[i].id + ");" );
+        button2.setAttribute("onClick", "javascript: editarPersona(" + personas[i].id + ");");
         button2.innerText = "Actualizar";
 
         // celda
@@ -238,7 +356,7 @@ function recargarLista(personas) {
 function leerPersona() {
 
     // si no es valido el form, fin.
-    if(!isNuevaPersonaValid())
+    if (!isNuevaPersonaValid())
         return;
 
     // datos de la persona
@@ -260,14 +378,14 @@ function isNuevaPersonaValid() {
 
     // formulario de validacion
     var form = document.getElementById('frmPersona');
-    
+
     // chequea la validacion
     if (form.checkValidity() === false) {
 
         form.classList.add('was-validated');
         return false;
     }
-    
+
     // valid
     return true;
 }
@@ -286,7 +404,7 @@ function validarActualizacionPersona() {
         form.classList.add('was-validated');
         return false;
     }
-    
+
     // valid
     return true;
 }
@@ -314,7 +432,7 @@ function abrirActualizacionPersona(persona) {
  */
 function leerPersonaActualizada() {
 
-    if(!validarActualizacionPersona())
+    if (!validarActualizacionPersona())
         return;
 
     // datos de la persona
@@ -333,10 +451,10 @@ function leerPersonaActualizada() {
  * limpia el modal de nueva persona.
  */
 function limpiarNuevaPersona() {
-    
+
     // formulario de validacion
     var form = document.getElementById('frmPersona');
-        
+
     form.classList.remove('was-validated');
 
     document.getElementById("nombre").value = "";
@@ -349,10 +467,10 @@ function limpiarNuevaPersona() {
  * limpia el modal de nueva persona.
  */
 function limpiarActualizarPersona() {
-    
+
     // formulario de validacion
     var form = document.getElementById('frmUpdatePersona');
-        
+
     form.classList.remove('was-validated');
 }
 
@@ -363,7 +481,7 @@ function onBusquedaPersona() {
 
     let criterio = document.getElementById("busquedaNombre").value;
 
-    if(!nombre) {
+    if (!nombre) {
         return;
     }
 
