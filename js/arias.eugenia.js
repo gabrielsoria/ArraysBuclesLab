@@ -3,25 +3,26 @@
  * DEFINIR AQUI LAS VARIABLES GLOBALES NECESARIAS.
  */
 
-var personas = ["santos", "medina", "ravenna", "lampone"];
+var personas = [];
 var id = [];
 var contador = 1;
 
-for (var i = 0; i < personas.length; i++) {
-    id.push("usuario" + contador++) 
-}
+
 
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
-// ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE 
-// TIENE COMO id EL ID PASADO POR PARAMETRO.
+// ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE TIENE COMO id EL ID PASADO POR PARAMETRO.
 
-function recibirArray (personas, id) {
-    for(var i = 0; i < personas.length-1 ; i++) {
-        return personas.indexof(i);
+function ubicacionPersona (personas,id) {
+    var i;
+    for(i = 0; i < personas.length; i++) {
+       if(personas[i].id == id) {
+           break;
+       }
     }
+    return i;
 }
 
-recibirArray(personas);
+
 
 // 2- COMPLETAR LA FUNCION agregarPersona(nombre, apellido, edad) PARA QUE 
 // CON LA INFORMACION RECIBIDA CREE UN OBJETO CON LAS SIGUIENTES PROPIEDADES
@@ -38,8 +39,15 @@ recibirArray(personas);
  * @param {number} edad 
  */
 function agregarPersona(nombre, apellido, edad) {
+    var usuario = new Object();
+        usuario.nombre = nombre;
+        usuario.apellido = apellido;
+        usuario.edad = edad;
+        usuario.id = ("usuario" + contador++)
+    
+    personas.push(usuario);
+    recargarLista(personas);
 
-    alert("Usar la informacion recibida para crear una persona y agregarla a la lista de personas.");
 }
 
 
