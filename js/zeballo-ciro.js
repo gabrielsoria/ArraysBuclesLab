@@ -2,16 +2,17 @@
  * SECCION DE VARIABLES GLOBALES.
  * DEFINIR AQUI LAS VARIABLES GLOBALES NECESARIAS.
  */
-
-
-
-
+var personas = [];
+var id = 0;
 
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE 
 // TIENE COMO id EL ID PASADO POR PARAMETRO.
-
-
+var busquedaID = function(personas, id){
+    return personas.findIndex(function(element){//return devuelve la posicion
+        return element.id==id;//return devuelve si son iguales
+    });
+};
 
 // 2- COMPLETAR LA FUNCION agregarPersona(nombre, apellido, edad) PARA QUE 
 // CON LA INFORMACION RECIBIDA CREE UN OBJETO CON LAS SIGUIENTES PROPIEDADES
@@ -28,8 +29,16 @@
  * @param {number} edad 
  */
 function agregarPersona(nombre, apellido, edad) {
-
-    alert("Usar la informacion recibida para crear una persona y agregarla a la lista de personas.");
+    var individuo = {
+        nombre: nombre, 
+        apellido: apellido, 
+        edad:edad, 
+        id: id
+    };
+    personas.push(individuo);
+    recargarLista(personas);
+    id++;
+    //alert("Usar la informacion recibida para crear una persona y agregarla a la lista de personas.");
 }
 
 
@@ -42,8 +51,9 @@ function agregarPersona(nombre, apellido, edad) {
  * elimina la primera persona de la lista
  */
 function eliminarPrimero() {
-
-    alert("Hacer funcionalidad para eliminar la primera persona de la lista.");
+    personas.shift();
+    recargarLista(personas);
+    //alert("Hacer funcionalidad para eliminar la primera persona de la lista.");
 }
 
 // 4- COMPLETAR LA FUNCION eliminarUltimo() PARA QUE ELIMINE LA ULTIMA PERSONA 
@@ -55,8 +65,9 @@ function eliminarPrimero() {
  * elimina la ultima persona de la lista.
  */
 function eliminarUltimo() {
-
-    alert("Hacer funcionalidad para eliminar la ultima persona de la lista.");
+    personas.pop();
+    recargarLista(personas);
+    //alert("Hacer funcionalidad para eliminar la ultima persona de la lista.");
 }
 
 // 5- COMPLETAR LA FUNCION buscarPersonaPorNombre(nombre) PARA QUE QUITE DEL LISTADO
@@ -74,9 +85,11 @@ function eliminarUltimo() {
  * @param {string} nombre 
  */
 function buscarPersonaPorNombre(nombre) {
-
-    alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
-
+    var filtrados = personas.filter(function(element){
+        return element.nombre.search(nombre)!==-1;
+    });
+    recargarLista(filtrados);
+    //alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
 }
 
 
@@ -89,12 +102,9 @@ function buscarPersonaPorNombre(nombre) {
  * limpia la busqueda de persona.
  */
 function limpiarBusquedaPersona() {
-
-    alert("Hacer funcionalidad para mostrar la lista completa de personas cargadas.");
+    recargarLista(personas);
+    //alert("Hacer funcionalidad para mostrar la lista completa de personas cargadas.");
 }
-
-
-
 
 
 // 7- COMPLETAR LA FUNCION editarPersona(id) PARA QUE ENCUENTRA LA PERSONA CON EL ID
@@ -107,12 +117,11 @@ function limpiarBusquedaPersona() {
  * @param {number} id 
  */
 function editarPersona(id) {
-
-    alert("Hacer funcionalidad para abrir la edicion de una persona.");
-
+    var persona = personas[busquedaID(personas,id)];
+   // alert("Hacer funcionalidad para abrir la edicion de una persona.");
     // UNA VEZ ENCONTRADA LA PERSONA, DESCOMENTAR LA SIGUIENTE LINEA Y PASARLE LA PERSONA 
     // ENCONTRADA, DE MODO QUE SE ABRA LA VENTANA DE EDICION.
-    // abrirActualizacionPersona(persona);
+     abrirActualizacionPersona(persona);
 }
 
 
@@ -131,8 +140,11 @@ function editarPersona(id) {
  * @param {number} edad 
  */
 function actualizarPersona(id, nombre, apellido, edad) {
-
-    alert("Usar la informacion recibida para actualizar una persona.");
+    var pos = busquedaID(personas,id);
+    var nuevaPersona = {nombre:nombre,apellido:apellido,edad:edad,id:id}
+    personas.splice(pos,1,nuevaPersona);
+    recargarLista(personas);
+    //alert("Usar la informacion recibida para actualizar una persona.");
 }
 
 
@@ -149,16 +161,12 @@ function actualizarPersona(id, nombre, apellido, edad) {
  * @param {number} idPersona 
  */
 function eliminarPersona(id) {
-
-    
-    alert("Hacer la funcionalidad necesaria para eliminar la persona que tiene el id recibido.");
+    var pos = busquedaID(personas,id);
+    personas.splice(pos, 1);
+    recargarLista(personas);
+    //alert("Hacer la funcionalidad necesaria para eliminar la persona que tiene el id recibido.");
     
 }
-
-
-
-
-
 
 
 
