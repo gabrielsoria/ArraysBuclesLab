@@ -3,7 +3,7 @@
  * DEFINIR AQUI LAS VARIABLES GLOBALES NECESARIAS.
  */
 
-var listaPersonas = [];
+var personas = [];
 var id = [];
 var contador = 1;
 
@@ -12,10 +12,10 @@ var contador = 1;
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE TIENE COMO id EL ID PASADO POR PARAMETRO.
 
-function ubicacionPersona (listaPersonas,id) {
+function ubicacionPersona (personas,id) {
     var i;
-    for(i = 0; i < listaPersonas.length; i++) {
-       if(listaPersonas[i].id == id) {
+    for(i = 0; i < personas.length; i++) {
+       if(personas[i].id == id) {
            break;
        }
     }
@@ -41,14 +41,14 @@ function ubicacionPersona (listaPersonas,id) {
 
 
 function agregarPersona(nombre, apellido, edad) {
-    let usuario = new Object();
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        this.id = ("usuario" + contador++)
-    
-    listaPersonas.push(usuario);
-    recargarLista(listaPersonas);
+    let usuario = {
+        nombre: nombre,
+        apellido: apellido,
+        edad: edad,
+        id: ("usuario" + contador++)
+    }
+    personas.push(usuario);
+    recargarLista(personas);
 
 }
 
@@ -62,8 +62,8 @@ function agregarPersona(nombre, apellido, edad) {
  * elimina la primera persona de la lista
  */
 function eliminarPrimero() {
-    listaPersonas.shift();
-    recargarLista(listaPersonas);
+    personas.shift();
+    recargarLista(personas);
     
 }
 
@@ -76,8 +76,8 @@ function eliminarPrimero() {
  * elimina la ultima persona de la lista.
  */
 function eliminarUltimo() {
-    listaPersonas.pop();
-    recargarLista(listaPersonas);
+    personas.pop();
+    recargarLista(personas);
 }
 
 // 5- COMPLETAR LA FUNCION buscarPersonaPorNombre(nombre) PARA QUE QUITE DEL LISTADO
@@ -96,7 +96,17 @@ function eliminarUltimo() {
  */
 function buscarPersonaPorNombre(nombre) {
 
-    //alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
+    // var n = string.search(nombre);
+    // recargarLista(personas[n])
+    // for(var i = 0; i < personas.length; i++){
+    //     if (personas[i].nombre == nombre){
+    //         recargarLista(personas[i])
+    //     }
+
+    // }
+    // personas[].nombre == nombre
+    // personas[usuario.nombre].search(nombre)
+    
 
 }
 
@@ -111,7 +121,7 @@ function buscarPersonaPorNombre(nombre) {
  */
 function limpiarBusquedaPersona() {
 
-    alert("Hacer funcionalidad para mostrar la lista completa de personas cargadas.");
+    recargarLista(personas)
 }
 
 
