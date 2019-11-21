@@ -3,7 +3,7 @@
  * DEFINIR AQUI LAS VARIABLES GLOBALES NECESARIAS.
  */
 
-var personas = [];
+var listaPersonas = [];
 var id = [];
 var contador = 1;
 
@@ -12,10 +12,10 @@ var contador = 1;
 // 1- HACER UNA FUNCION QUE RECIBE POR PARAMETROS UN ARRAY DE PERSONAS Y UN ID. 
 // ESTA FUNCION DEBE BUSCAR EN EL ARRAY Y RETORNAR LA UBICACION DE LA PERSONA QUE TIENE COMO id EL ID PASADO POR PARAMETRO.
 
-function ubicacionPersona (personas,id) {
+function ubicacionPersona (listaPersonas,id) {
     var i;
-    for(i = 0; i < personas.length; i++) {
-       if(personas[i].id == id) {
+    for(i = 0; i < listaPersonas.length; i++) {
+       if(listaPersonas[i].id == id) {
            break;
        }
     }
@@ -38,15 +38,17 @@ function ubicacionPersona (personas,id) {
  * @param {string} apellido 
  * @param {number} edad 
  */
+
+
 function agregarPersona(nombre, apellido, edad) {
-    var usuario = new Object();
-        usuario.nombre = nombre;
-        usuario.apellido = apellido;
-        usuario.edad = edad;
-        usuario.id = ("usuario" + contador++)
+    let usuario = new Object();
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.id = ("usuario" + contador++)
     
-    personas.push(usuario);
-    recargarLista(personas);
+    listaPersonas.push(usuario);
+    recargarLista(listaPersonas);
 
 }
 
@@ -60,8 +62,9 @@ function agregarPersona(nombre, apellido, edad) {
  * elimina la primera persona de la lista
  */
 function eliminarPrimero() {
-
-    alert("Hacer funcionalidad para eliminar la primera persona de la lista.");
+    listaPersonas.shift();
+    recargarLista(listaPersonas);
+    
 }
 
 // 4- COMPLETAR LA FUNCION eliminarUltimo() PARA QUE ELIMINE LA ULTIMA PERSONA 
@@ -73,8 +76,8 @@ function eliminarPrimero() {
  * elimina la ultima persona de la lista.
  */
 function eliminarUltimo() {
-
-    alert("Hacer funcionalidad para eliminar la ultima persona de la lista.");
+    listaPersonas.pop();
+    recargarLista(listaPersonas);
 }
 
 // 5- COMPLETAR LA FUNCION buscarPersonaPorNombre(nombre) PARA QUE QUITE DEL LISTADO
@@ -93,7 +96,7 @@ function eliminarUltimo() {
  */
 function buscarPersonaPorNombre(nombre) {
 
-    alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
+    //alert("Hacer funcionalidad para filtrar las personas que no coincidan con el criterio de busqueda.");
 
 }
 
