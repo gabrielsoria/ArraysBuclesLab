@@ -94,20 +94,15 @@ function eliminarUltimo() {
  * del total de personas cargadas, filtra las que no coinciden con el criterio de busqueda.
  * @param {string} nombre 
  */
+
 function buscarPersonaPorNombre(nombre) {
 
-    // var n = string.search(nombre);
-    // recargarLista(personas[n])
-    // for(var i = 0; i < personas.length; i++){
-    //     if (personas[i].nombre == nombre){
-    //         recargarLista(personas[i])
-    //     }
 
-    // }
-    // personas[].nombre == nombre
-    // personas[usuario.nombre].search(nombre)
-    
+    var result = personas.filter(x => {
+        return x.nombre.search(nombre) > -1;
+    })
 
+    recargarLista(result);
 }
 
 
